@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+%head
+  %title Star in a porno with Zack and Miri
+  = stylesheet_link_tag "zack"
+%body
+  <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+  = javascript_include_tag "zack"
+  %h1
+    Star in a porno with Zack and Miri
+    
+  - if flash[:note]
+    .error
+      = h flash[:note]
+  <fb:login-button length="long" onclick="facebook_button_onclick();"></fb:login-button>
+  
+  %br
+  %br
+  Click on an actor below to post your role request to Facebook
+  %br
+  - if @user
+    %h2
+      = h @user.first_name
+      wants to...
+  - for role in [:bubbles, :zack]
+    .role
+      = link_to actor_role_text(role), :action => "post_comment", :id=>role
+      %br
+      = link_to image_tag("#{role.to_s}.png"), :action => "post_comment", :id=>role
+  
+  <script type="text/javascript">
+  FB_RequireFeatures(["XFBML"], function()
+  {
+  FB.Facebook.init("2b1c5fd3ca446d22bce5ca37ea877c39", "/connect/xd_receiver.htm");
+  FB.Facebook.get_sessionState().waitUntilReady(function() { } );
+  });
+  </script>
+</html>

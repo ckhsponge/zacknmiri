@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+  <head>
+    <title
+    Facebook Test
+    ></title>
+  </head>
+  <body>
+    <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+    <h1>
+    Facebook Test
+    </h1>
+    <fb:login-button></fb:login-button>
+    <script type="text/javascript">
+        FB_RequireFeatures(["XFBML"], function(){
+            FB.Facebook.init("2b1c5fd3ca446d22bce5ca37ea877c39", "xd_receiver.htm");
+        });
+    </script>
+  </body>
+  

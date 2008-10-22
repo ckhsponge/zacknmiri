@@ -1,0 +1,15 @@
+body {
+  border: none;
+  background-color: black;
+  color: white;
+}
+a {
+  color: white;
+}
+.error {
+  color: red;
+}
+.role {
+  float: left;
+  padding: 5px;
+}
