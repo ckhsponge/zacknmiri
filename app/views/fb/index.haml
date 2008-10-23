@@ -12,6 +12,9 @@
     .error
       = h flash[:note]
   <fb:login-button length="long" onclick="facebook_button_onclick();"></fb:login-button>
+  %br
+  go to
+  = link_to "Facebook","http://facebook.com"
   
   %br
   %br
@@ -19,7 +22,9 @@
   %br
   - if @user
     %h2
-      = h @user.first_name
+      = image_tag @user.pic
+      %span{:style=>'font-size:160%'}
+        = h @user.first_name
       wants to...
   - for role in [:bubbles, :zack]
     .role
@@ -27,10 +32,11 @@
       %br
       = link_to image_tag("#{role.to_s}.png"), :action => "post_comment", :id=>role
   
+  = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
   <script type="text/javascript">
   FB_RequireFeatures(["XFBML"], function()
   {
-  FB.Facebook.init("2b1c5fd3ca446d22bce5ca37ea877c39", "/connect/xd_receiver.htm");
+  FB.Facebook.init(window.api_key, "/connect/xd_receiver.htm");
   FB.Facebook.get_sessionState().waitUntilReady(function() { } );
   });
   </script>

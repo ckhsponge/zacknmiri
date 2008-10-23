@@ -1,4 +1,3 @@
-window.api_key = "2b1c5fd3ca446d22bce5ca37ea877c39";
 
 /*
  * Ensure Facebook app is initialized and call callback afterward

@@ -76,6 +76,7 @@ class FbController < ApplicationController
       begin
         @user = @facebook_session.user
         puts "*** profile #{@user.name}"
+        puts "*** profile #{@user.pic}"
       rescue StandardError=>exc
         puts "StandardError: #{exc.to_s}"
         @user = nil
@@ -101,6 +102,7 @@ class FbController < ApplicationController
       user = @facebook_session.user
       ZackPublisher.register_feed_role(user)
       ZackPublisher.deliver_feed_role(user,params[:id])
+      flash[:note] = "Your Facebook profile has been updated"
       redirect_to :action => "index"
     rescue StandardError=>exc
       puts "StandardError: #{exc.to_s}"
