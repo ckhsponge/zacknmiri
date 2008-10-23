@@ -31,6 +31,6 @@ class ZackPublisher < Facebooker::Rails::Publisher
   end
   
   def feed_role_template
-    one_line_story_template "{*actor*} wants to {*role*} - posted from #{link_to 'Zack N Miri','http://chowder.msponge.com:8111'}"
+    one_line_story_template "{*actor*} wants to {*role*} - posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
   end
 end

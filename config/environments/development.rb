@@ -15,3 +15,6 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+ENV['APP_NAME'] = 'Zack N Miri Test'
+ENV['APP_URL'] = 'http://chowder.msponge.com:8111'
