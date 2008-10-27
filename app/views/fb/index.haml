@@ -32,6 +32,26 @@
       %br
       = link_to image_tag("#{role.to_s}.png"), :action => "post_comment", :id=>role
   
+  .clearing
+  %fb:prompt-permission{:perms=>"email"}
+    Would you like to receive email from our application?
+  %br
+  Please send me an
+  = link_to 'Email', :action => 'email'
+  %br
+  %fb:prompt-permission{:perms=>"rsvp_event"}
+    Would you like to RSVP from our application?
+  %br
+  Yes! I want to
+  = link_to 'RSVP', :action => 'rsvp'
+  %br
+  View the event
+  <fb:eventlink eid="32102463702" />
+  .clearing{:style => "height:20px"}
+  
+  = render :partial => 'invite'
+  
+  
   = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
   <script type="text/javascript">
   FB_RequireFeatures(["XFBML"], function()

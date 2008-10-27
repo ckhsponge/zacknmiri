@@ -33,4 +33,13 @@ class ZackPublisher < Facebooker::Rails::Publisher
   def feed_role_template
     one_line_story_template "{*actor*} wants to {*role*} - posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
   end
+  
+  def email(to,f = nil)
+      send_as :email
+      recipients to
+      from f if f
+      title "Zack N Miri think you are a star"
+      fbml 'Congratulations! You are going to be a movie star with Zack N Miri.'
+      text fbml
+    end
 end

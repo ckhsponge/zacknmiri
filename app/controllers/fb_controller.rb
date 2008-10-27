@@ -77,6 +77,7 @@ class FbController < ApplicationController
         @user = @facebook_session.user
         puts "*** profile #{@user.name}"
         puts "*** profile #{@user.pic}"
+        puts "*** profile #{@user.inspect}"
       rescue StandardError=>exc
         puts "StandardError: #{exc.to_s}"
         @user = nil
@@ -105,9 +106,56 @@ class FbController < ApplicationController
       flash[:note] = "Your Facebook profile has been updated"
       redirect_to :action => "index"
     rescue StandardError=>exc
-      puts "StandardError: #{exc.to_s}"
       @user = nil
-      flash[:note] = "Please sign in to facebook"
+      flash[:note] = "Please sign in to facebook (#{exc.to_s})"
+      redirect_to :action => "index"
+    rescue Exception => exc2
+      @user = nil
+      flash[:note] = "Error: #{exc2.to_s}"
+      redirect_to :action => "index"
+    end
+  end
+  
+  def invite
+    flash[:note] = "Invitation sent"
+    redirect_to "/"
+  end
+  
+  def ignore
+    flash[:note] = "Ignore"
+    redirect_to "/"
+  end
+  
+  def rsvp
+    begin
+      @facebook_session = session[:facebook_session]
+      user = @facebook_session.user
+      eid = "32102463702"
+      events = @facebook_session.events(:eids => eid)
+      puts "EVENTS #{events.inspect}"
+      #attendance = Facebooker::Event::Attendance.new(:eid => eid, :uid => user.id)
+      #puts "ATTENDANCE #{attendance.inspect}"
+      #puts "EVENT #{attendance.event.inspect}"
+      event = events[0]
+      event.session = @facebook_session
+      event.rsvp(user, "declined")
+      flash[:note] = "RSVP"
+      redirect_to "/"
+    rescue StandardError=>exc
+      flash[:note] = "Error: #{exc.to_s}"
+      redirect_to :action => "index"
+    end
+  end
+  
+  def email
+    begin
+      @facebook_session = session[:facebook_session]
+      user = @facebook_session.user
+      ZackPublisher.deliver_email(user)
+      flash[:note] = "Email sent"
+      redirect_to :action => "index"
+    rescue StandardError=>exc
+      flash[:note] = "Error: #{exc.to_s}"
       redirect_to :action => "index"
     end
   end
