@@ -1,4 +1,5 @@
 class FbController < ApplicationController
+  include ActorRole
   #ensure_authenticated_to_facebook #:except => [:index, :post_comment]
   #ensure_application_is_installed_by_facebook_user :except => :index
   
@@ -65,6 +66,7 @@ class FbController < ApplicationController
   end
   
   def index
+    @roles = Role.find(:all, :limit => 20, :order => "created_at desc")
     secure_with_token!
     #set_facebook_session
     puts "fb #{@facebook_session.inspect}"
@@ -103,6 +105,7 @@ class FbController < ApplicationController
       user = @facebook_session.user
       ZackPublisher.register_feed_role(user)
       ZackPublisher.deliver_feed_role(user,params[:id])
+      Role.create(:uid => user.id, :text => "#{user.name} wants to #{actor_role_text(params[:id])}")
       flash[:note] = "Your Facebook profile has been updated"
       redirect_to :action => "index"
     rescue StandardError=>exc
