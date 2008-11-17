@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+%head
+  %title Star in a porno with Zack and Miri
+  = stylesheet_link_tag "zack"
+%body
+  <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+  = javascript_include_tag "zack"
+  %h1
+    Star in a porno with Zack and Miri
+    
+  - if flash[:note]
+    .error
+      = h flash[:note]
+  <fb:login-button length="long" onclick="facebook_button_onclick();"></fb:login-button>
+  %br
+  go to
+  = link_to "Facebook","http://facebook.com"
+  
+  %br
+  %br
+  Click on an actor below to post your role request to Facebook
+  %br
+  - if @user
+    %h2
+      = image_tag @user.pic
+      %span{:style=>'font-size:160%'}
+        = h @user.first_name
+      wants to...
+  - for role in [:bubbles, :zack]
+    .role
+      = link_to actor_role_text(role), :action => "post_comment", :id=>role
+      %br
+      = link_to image_tag("#{role.to_s}.png"), :action => "post_comment", :id=>role
+  
+  .clearing
+  = render :partial => 'roles'
+  .clearing
+  %fb:prompt-permission{:perms=>"email"}
+    Would you like to receive email from our application?
+  %br
+  Please send me an
+  = link_to 'Email', :action => 'email'
+  %br
+  %fb:prompt-permission{:perms=>"rsvp_event"}
+    Would you like to RSVP from our application?
+  %br
+  Yes! I want to
+  = link_to 'RSVP', :action => 'rsvp'
+  %br
+  View the event
+  <fb:eventlink eid="32102463702" />
+  .clearing{:style => "height:20px"}
+  
+  = render :partial => 'invite'
+  
+  
+  = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
+  <script type="text/javascript">
+  FB_RequireFeatures(["XFBML"], function()
+  {
+  FB.Facebook.init(window.api_key, "/connect/xd_receiver.htm");
+  FB.Facebook.get_sessionState().waitUntilReady(function() { } );
+  });
+  </script>
+</html>

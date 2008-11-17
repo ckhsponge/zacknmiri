@@ -1,0 +1,10 @@
+.title3
+.clearing
+.check
+.success
+  = h flash[:note] || "Success!"
+.clearing{:style => "height:40px"}
+.more_action
+  = link_to image_tag("f3.facebook.png"), "http://facebook.com", :target => "_blank"
+.more_action
+  = link_to image_tag("f3.again.png"), :action => "choose_role"

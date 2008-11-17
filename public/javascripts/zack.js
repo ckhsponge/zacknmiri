@@ -58,7 +58,7 @@ function facebook_button_onclick() {
           // you could do an ajax call for the account linking, and then
           // just replace content inline without a full page refresh.
           //refresh_page();
-          window.location = '/fb/authenticate'
+          window.location = '/authenticate'
         });
     });
 }

@@ -1,4 +1,5 @@
 - for role in @roles
-  %fb:profile-pic{:uid=>role.uid, :linked=>"true"}
-  = h role.text
-  %br
+  .role
+    %fb:profile-pic{:uid=>role.uid, :linked=>"true"}
+    %br
+    = h role.text
