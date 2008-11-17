@@ -62,6 +62,8 @@ class FbController < ApplicationController
   end
   
   def action_success
+    @facebook_session = session[:facebook_session]
+    @user = @facebook_session.user
   end
   
   protected
