@@ -7,6 +7,11 @@ class FbController < ApplicationController
     
   end
   
+  def sign_out
+    reset_session
+    redirect_to "/"
+  end
+  
   def authenticate
     @facebook_session = Facebooker::Session.create(Facebooker.api_key, Facebooker.secret_key)
     session[:facebook_session] = @facebook_session
