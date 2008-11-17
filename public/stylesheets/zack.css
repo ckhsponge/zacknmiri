@@ -30,8 +30,8 @@ img {
 	border-top: #000 solid 1px;
 	height: 10px;
 }
-h1 {
-	padding: 10px;
+h2 {
+	padding-left: 10px;
 }
 .main_content {
 	position: relative;
