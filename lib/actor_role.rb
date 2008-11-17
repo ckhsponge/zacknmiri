@@ -3,9 +3,9 @@ module ActorRole
     k = k.to_sym
     case k
       when :bubbles
-        "do something naughty with Bubbles"
+        "splash around with Bubbles"
       when :zack
-        "deliver the milk with Zack"
+        "get some milk with Zack"
       else
         "do the unknown"
     end
