@@ -21,11 +21,13 @@ img {
   padding: 5px;
   text-align: center;
   width: 150px;
+  height: 130px;
 }
 .clearing {
   clear:both;
 }
 .content_seperator {
+  clear:both;
 	width: 100%;
 	border-top: #000 solid 1px;
 	height: 10px;

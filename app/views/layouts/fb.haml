@@ -10,8 +10,7 @@
     %h2
       - if @user
         = image_tag @user.pic, :width => 50
-      Zack N Miri - share your interest -
-      = link_to "rich media by Spongecell", "http://spongecell.com"
+      Zack N Miri - share your interest
     .content_seperator
     .main_content
       .widget_content
@@ -19,6 +18,10 @@
 
     .content_seperator
     = render :partial => 'roles'
+    .content_seperator
+    = link_to "Rich Media by Spongecell", "http://spongecell.com"
+    &#183;
+    = link_to "Facebook and Rails on Spongetech", "http://spongetech.wordpress.com"
       
     = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
     = javascript_include_tag "facebook_require"
