@@ -3,7 +3,7 @@ http://zacknmiri.com
 http://spongecell.com
 Chris Hobbs
 
-Be sure to create your own config/facebooker.yml:
+Be sure to create your own config/facebooker.yml. I only set the api key, secret key and ports.
 development:
   api_key: 
   secret_key: 
@@ -14,3 +14,14 @@ development:
     public_port: 
     local_port: 
     
+Developer tips:
+It will not work on localhost. There are some ways to set up tunneling but when I am developing I 
+map a domain name my publicly facing ip address and then have my router forward requests to port 
+3000 to my computer. Then in my facebook settings I make the callback URL be something like 
+http://znm.spongecell.com:3000/zack/connect. When developing your browser should point to 
+http://znm.spongecell.com:3000.
+
+Remember that your xd_receiver file must have the same path as the callback url.
+http://znm.spongecell.com:3000/zack/connect/xd_receiver.htm
+
+Settings for the above are in environment.rb.
