@@ -1,0 +1,12 @@
+- seperator = "&#183;"
+.footer
+  = link_to "Rich Media by Spongecell", "http://spongecell.com"
+  = seperator
+  = link_to "Facebook and Rails on Spongetech", "http://spongetech.wordpress.com"
+  - if @user
+    %br
+      = link_to "Home", "/"
+      = seperator
+      = link_to "Story Publisher", :controller => "story", :action => "index"
+      = seperator
+      = link_to "Sign Out", :controller => "zack", :action => "sign_out"

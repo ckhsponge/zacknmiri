@@ -67,6 +67,9 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 end
 
+ENV['XD_RECEIVER_LOCATION'] = "/zack/connect/xd_receiver.htm"
+ENV['FACEBOOK_AUTHENTICATE_LOCATION'] = "/zack/authenticate"
+
 #File: lib/extensions.rb
 module Facebooker
   class Service   

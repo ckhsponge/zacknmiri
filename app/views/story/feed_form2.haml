@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+%html{'xmlns' => "http://www.w3.org/1999/xhtml", 'xmlns:fb' => "http://www.facebook.com/2008/fbml"}
+  %head
+    %title Star in a porno with Zack and Miri
+    = stylesheet_link_tag "zack"
+    = javascript_include_tag "zack"
+    = javascript_include_tag "http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"
+    
+  %body
+    body
+    = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
+    / showFeedDialog (int template_bundle_id, object template_data, array target_ids, string body_general, FeedStorySize story_size, RequireConnect require_connect, Callback callback)
+    /= link_to_function "no dialog needed", 'FB.Connect.showFeedDialog(38431713291, {"video": "http://www.youtube.com/v/wzyT9-9lUyE&hl=en&fs=1", "role": "use the force", "comment": "tscrod2"}, null, "hi", 2, true, null)'
+    %script{:type => "text/javascript"}
+      FB_RequireFeatures(["XFBML"], function(){ 
+      FB.Facebook.init(window.api_key, "/connect/xd_receiver.htm", null); 
+      FB.Connect.showFeedDialog("38431713291", {"video": "http://www.youtube.com/v/wzyT9-9lUyE&hl=en&fs=1", "role": "use the force", "comment": "tscrod2y"})
+      });
+    
+    %fb:serverfbml{:style=>"width: 755px;"}
+      %script{:type=>"text/fbml"}
+        %fb:fbml
+          %script
+            Facebook.showFeedDialog("38431713291", {"video": "http://www.youtube.com/v/wzyT9-9lUyE&hl=en&fs=1", "role": "use the force", "comment": "tscrod2x"})
+    
+    = link_to_function "open form", "open_feed_form()"
+    %script{:type => "text/javascript"}
+      function open_feed_form() {
+      alert('opening');
+      FB_RequireFeatures(["XFBML"], function(){ 
+      FB.Connect.showFeedDialog("38431713291", {"video": "http://www.youtube.com/v/wzyT9-9lUyE&hl=en&fs=1", "role": "use the force", "comment": "tscrod2"})
+      });
+      };

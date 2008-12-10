@@ -21,10 +21,6 @@
     .content_seperator
     = render :partial => 'roles'
     .content_seperator
-    .footer
-      = link_to "Rich Media by Spongecell", "http://spongecell.com"
-      &#183;
-      = link_to "Facebook and Rails on Spongetech", "http://spongetech.wordpress.com"
-      
-    = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
+      = render :partial => '/zack/footer'
+    = render :partial => '/zack/js_constants'
     = javascript_include_tag "facebook_require"

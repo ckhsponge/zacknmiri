@@ -1,0 +1,36 @@
+%h2
+  Feed Form
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%fb:serverfbml{:style=>"width: 755px;"}
+  %script{:type=>"text/fbml"}
+    %fb:fbml
+      This is above the dialog
+      %br
+      %fb:dialog{ :id=>"my_dialog"}
+        %fb:dialog-title
+          My Little Dialog
+        %fb:dialog-content
+          This is the top of the form
+          %br
+          This is the top of the form
+          %br
+          This is the top of the form
+          %br
+          This is the top of the form
+          %br
+          This is the top of the form
+          %br
+          %form{:id => "my_form", :fbtype => "feedStory", :action => url_for(:action => "feed_action", :only_path => false)}
+            %label{:name => "comment"}
+              Comment
+            = text_field_tag "comment"
+            %input{:type => "submit", :label => "submit it!"}
+        %fb:dialog-button{:type => "submit", :value => "Yes", :form_id => "my_form"}
+      how about 
+      <a href="#" clicktoshowdialog="my_dialog" style="border-top: solid 1px">this one?</a>

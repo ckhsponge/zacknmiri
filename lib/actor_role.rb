@@ -6,6 +6,8 @@ module ActorRole
         "splash around with Bubbles"
       when :zack
         "get some milk with Zack"
+      when :force
+        "use the force"
       else
         "do the unknown"
     end

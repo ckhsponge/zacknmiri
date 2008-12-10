@@ -28,4 +28,19 @@ class ApplicationController < ActionController::Base
     RAILS_ENV != 'production'
   end
   
+  def require_facebook_user
+    begin
+      @facebook_session = session[:facebook_session]
+      @user = @facebook_session.user
+    rescue StandardError=>exc
+      @user = nil
+      flash[:error] = "Please sign in to facebook (#{exc.to_s})"
+      redirect_to "/"
+    rescue Exception => exc2
+      @user = nil
+      flash[:error] = "Error: #{exc2.to_s}"
+      redirect_to "/"
+    end
+  end
+  
 end

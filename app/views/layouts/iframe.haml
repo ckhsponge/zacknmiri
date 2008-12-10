@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+%html{'xmlns' => "http://www.w3.org/1999/xhtml", 'xmlns:fb' => "http://www.facebook.com/2008/fbml"}
+  %head
+    %title Star in a porno with Zack and Miri
+    = stylesheet_link_tag "zack"
+    = javascript_include_tag "zack"
+    = javascript_include_tag "http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"
+    
+  %body
+    .main_content
+      .widget_content
+        = @content_for_layout
+    
+    = javascript_tag "window.api_key = '#{Facebooker.api_key}';"
+    = javascript_include_tag "facebook_require"

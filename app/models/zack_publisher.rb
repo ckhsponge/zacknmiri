@@ -1,28 +1,5 @@
 class ZackPublisher < Facebooker::Rails::Publisher
   include ActorRole
-  #File: lib/facebooker_publisher.rb Method: mini_feed
-  def mini_feed(user)
-#    send_as :action
-#    self.from( user)
-#    title "wants to star in a porno with Zack."
-#    body "#{fb_name(user)} is a good actor."
-#    image_1(image_path("fbtt.png"))
-#    #image_1_link("http://chowder.msponge.com:8111") #outline_path(:only_path => false))
-#    RAILS_DEFAULT_LOGGER.debug("Sending mini feed story for user #{user.id}")
-    
-    
-      send_as :user_action
-      self.from user
-      data :friend=>"Mike"
-  end
-  
-  def mini_feed_template
-      one_line_story_template "{*actor*} did stuff with {*friend*}"
-      one_line_story_template "{*actor*} did stuff"
-      short_story_template "{*actor*} has a title {*friend*}", "short_body"
-      short_story_template "{*actor*} has a title", "short_body"
-      full_story_template "{*actor*} has a title {*friend*}", "full_body"
-  end
   
   def feed_role(user,role)
     send_as :user_action
@@ -32,7 +9,20 @@ class ZackPublisher < Facebooker::Rails::Publisher
   
   def feed_role_template
     one_line_story_template "{*actor*} wants to {*role*} - posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
+    short_story_template "{*actor*} wants to {*role*}","posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
   end
+  
+  def story_action_template
+    one_line_story_template "{*actor*} wants to {*role*} - posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
+    short_story_template "{*actor*} wants to {*role*}", "<i>{*comment*}</i><br/>posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
+    full_story_template "{*actor*} wants to {*role*}", "<i>{*comment*}</i><br/>proudly posted from #{link_to ENV['APP_NAME'],ENV['APP_URL']}"
+  end
+  
+#  def story_action
+#    send_as :user_action
+#    self.from user
+#    data :role=>actor_role_text(role), :video => "http://www.youtube.com/v/wzyT9-9lUyE&hl=en&fs=1"
+#  end
   
   def email(to,f = nil)
       send_as :email
@@ -41,5 +31,16 @@ class ZackPublisher < Facebooker::Rails::Publisher
       title "Zack N Miri think you are a star"
       fbml 'Congratulations! You are going to be a movie star with Zack N Miri.'
       text fbml
-    end
+  end
+  
+  def self.register_if_needed(name)
+    find_bundle_id(name)
+  end
+  
+  def self.find_bundle_id(name)
+    template = Facebooker::Rails::Publisher::FacebookTemplate.find_by_template_name(name)
+    return template.bundle_id if template
+    result = self.send("register_#{name}")
+    return result
+  end
 end

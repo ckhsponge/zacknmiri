@@ -1,0 +1,35 @@
+%h2
+  How many different ways can we publish a story?
+%h3
+  Using the API - limited to one line stories
+%p
+  One line API publish for
+  = link_to "Bubbles", :action =>'one_line_api', :id => "bubbles"
+  %br
+  One line API publish for
+  = link_to "Zack", :action =>'one_line_api', :id => "zack"
+%h3
+  Using javascript to build a form
+%p
+  The comment is built using javascript and opens when
+  = link_to_function "triggered", "open_feed_form()"
+%h3
+  Using an iFrame from Facebook - a video is included in this post
+%p
+  %fb:serverfbml{ :style => "width: 755px;" }
+    %script{:type => "text/fbml"}
+      %fb:fbml
+        %h1
+          Post a comment to your wall!
+        %form{:id => "my_form", :fbtype => "feedStory", :action => url_for(:action => "feed_action", :only_path => false)}
+          %label{:name => "comment"}
+            Comment
+          = text_field_tag "comment"
+          %input{:type => "submit", :label => "submit it!"}
+
+= javascript_tag "window.story_template_id = '#{ZackPublisher.find_bundle_id('story_action')}';"
+%script
+  function open_feed_form() {
+  var data = {"role": "use the force", "comment": "This comment was specified with javascript."};
+  FB.Connect.showFeedDialog(window.story_template_id, data, null, null, null, FB.RequireConnect.promptConnect);
+  }

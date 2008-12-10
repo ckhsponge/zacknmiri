@@ -17,7 +17,7 @@ function ensure_init(callback) {
         // xd_receiver.php is a relative path here, because The Run Around
         // could be installed in a subdirectory
         // you should prefer an absolute URL (like "/xd_receiver.php") for more accuracy
-        FB.Facebook.init(window.api_key, "/connect/xd_receiver.htm");
+        FB.Facebook.init(window.api_key, window.xd_receiver_location);
 
         window.is_initialized = true;
         callback();
@@ -58,7 +58,7 @@ function facebook_button_onclick() {
           // you could do an ajax call for the account linking, and then
           // just replace content inline without a full page refresh.
           //refresh_page();
-          window.location = '/authenticate'
+          window.location = window.facebook_authenticate_location;
         });
     });
 }
