@@ -1,5 +1,8 @@
+- @roles ||= []
 - for role in @roles
   .role
     %fb:profile-pic{:uid=>role.uid, :linked=>"true"}
     %br
     = h role.text
+.clearing
+= link_to "See all #{@roles_count}", :controller => "zack", :action => "roles"

@@ -14,12 +14,16 @@
         Zack N Miri -
       share your interest using Facebook Connect
     .content_seperator
-    .main_content
-      .widget_content
-        = @content_for_layout
+    - if @center_layout
+      .main_content
+        .widget_content
+          = @content_for_layout
+    - else
+      = @content_for_layout
 
-    .content_seperator
-    = render :partial => 'roles'
+    - if @footer_roles
+      .content_seperator
+      = render :partial => 'roles'
     .content_seperator
       = render :partial => '/zack/footer'
     = render :partial => '/zack/js_constants'

@@ -32,15 +32,21 @@ class ApplicationController < ActionController::Base
     begin
       @facebook_session = session[:facebook_session]
       @user = @facebook_session.user
+      @user.pic
     rescue StandardError=>exc
       @user = nil
       flash[:error] = "Please sign in to facebook (#{exc.to_s})"
-      redirect_to "/"
+      reset_session
+      redirect_to "/zack/sign_out"
+      return false
     rescue Exception => exc2
       @user = nil
       flash[:error] = "Error: #{exc2.to_s}"
-      redirect_to "/"
+      reset_session
+      redirect_to "/zack/sign_out"
+      return false
     end
+    return true
   end
   
 end

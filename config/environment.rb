@@ -69,7 +69,8 @@ end
 
 ENV['XD_RECEIVER_LOCATION'] = "/zack/connect/xd_receiver.htm"
 ENV['FACEBOOK_AUTHENTICATE_LOCATION'] = "/zack/authenticate"
-ENV['FACEBOOK_SIGNED_IN_URL'] = "/zack/choose_role"
+#the js redirects to this url when signed in, it must set up the facebook session
+ENV['FACEBOOK_SIGNED_IN_URL'] = "/zack/authenticate"
 
 #File: lib/extensions.rb
 module Facebooker

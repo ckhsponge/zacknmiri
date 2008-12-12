@@ -1,7 +1,7 @@
 class ZackController < ApplicationController
   include ActorRole
   
-  before_filter :load_data
+  before_filter :load_data, :except => :roles
   before_filter :require_facebook_user, :only => [:choose_role, :save_role, :send_email, :action_success]
   
   def index
@@ -43,10 +43,18 @@ class ZackController < ApplicationController
   
   def action_success
   end
+
+  def roles
+    @center_layout = false
+    @roles = Role.find(:all, :limit => 100, :order => "created_at desc")
+    @roles_count = Role.count
+  end
   
   protected
   def load_data
-    @roles = Role.find(:all, :limit => 100, :order => "created_at desc")
+    @center_layout = true
+    @footer_roles = @roles = Role.find(:all, :limit => 10, :order => "created_at desc")
+    @roles_count = Role.count
   end
   
 end
