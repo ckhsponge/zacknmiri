@@ -2,6 +2,7 @@
 class StoryController < ApplicationController
   include ActorRole
   
+  layout "zack"
   before_filter :require_facebook_user, :except => [:feed_action, :not_signed_in]
   
   def not_signed_in
@@ -20,18 +21,7 @@ class StoryController < ApplicationController
     render :action => "complete"
   end
   
-  
-  def feed_form
-    @facebook_session = session[:facebook_session]
-    @user = @facebook_session.user
-    #result = ZackPublisher.register_story_action(@user)
-    #puts "reg result #{result.id}"
-  end
-  
-  def feed_form2
-    render :action => "feed_form2" , :layout => false
-  end
-  
+  #a form on the page triggers facebook who calls this action to render a comment preview back on the page
   def feed_action
     url = url_for :action => "success_text", :only_path => false
     
