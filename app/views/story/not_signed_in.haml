@@ -1,0 +1,11 @@
+
+%p
+  The comment is built using javascript and opens when
+  = link_to_function "triggered", "open_feed_form()"
+
+= javascript_tag "window.story_template_id = '#{ZackPublisher.find_bundle_id('story_action')}';"
+%script
+  function open_feed_form() {
+  var data = {"role": "use the force", "comment": "This comment was specified with javascript."};
+  FB.Connect.showFeedDialog(window.story_template_id, data, null, null, null, FB.RequireConnect.promptConnect);
+  }

@@ -1,3 +1,34 @@
+/*
+ * The facebook_onload statement is printed out in the PHP. If the user's logged in
+ * status has changed since the last page load, then refresh the page to pick up
+ * the change.
+ *
+ * This helps enforce the concept of "single sign on", so that if a user is signed into
+ * Facebook when they visit your site, they will be automatically logged in -
+ * without any need to click the login button.
+ *
+ * @param already_logged_into_facebook  reports whether the server thinks the user
+ *                                      is logged in, based on their cookies
+ *
+ */
+function facebook_onload(already_logged_into_facebook) {
+  // user state is either: has a session, or does not.
+  // if the state has changed, detect that and reload.
+  FB.ensureInit(function() {
+      FB.Facebook.get_sessionState().waitUntilReady(function(session) {
+          var is_now_logged_into_facebook = session ? true : false;
+
+          // if the new state is the same as the old (i.e., nothing changed)
+          // then do nothing
+          if (is_now_logged_into_facebook == already_logged_into_facebook) {
+            return;
+          }
+
+          // otherwise, refresh to pick up the state change
+          window.location = window.facebook_signed_in_url;
+        });
+    });
+}
 
 /*
  * Ensure Facebook app is initialized and call callback afterward

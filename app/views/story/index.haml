@@ -11,10 +11,16 @@
 %h3
   Using javascript to build a form
 %p
-  The comment is built using javascript and opens when
-  = link_to_function "triggered", "open_feed_form()"
+  The comment is built using javascript
+  %br
+  %i
+    = @user.first_name
+    wants to use the force.
+  %br
+  = text_field_tag "js_comment", "Go see this movie!", :id => "js_comment"
+  %button{:onclick => "open_feed_form()"} Submit
 %h3
-  Using an iFrame from Facebook - a video is included in this post
+  Using an iFrame from Facebook
 %p
   %fb:serverfbml{ :style => "width: 755px;" }
     %script{:type => "text/fbml"}
@@ -30,6 +36,7 @@
 = javascript_tag "window.story_template_id = '#{ZackPublisher.find_bundle_id('story_action')}';"
 %script
   function open_feed_form() {
-  var data = {"role": "use the force", "comment": "This comment was specified with javascript."};
+  var video_data = {"video_src": "http://www.youtube.com/v/OssgMY_mkMc&hl=en&fs=1", "preview_img": "http://zacknmiri.com/images/f1.znm.png"};
+  var data = {"video": video_data, "role": "use the force", "comment": document.getElementById("js_comment").value};
   FB.Connect.showFeedDialog(window.story_template_id, data, null, null, null, FB.RequireConnect.promptConnect);
   }

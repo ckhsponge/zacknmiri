@@ -2,7 +2,11 @@
 class StoryController < ApplicationController
   include ActorRole
   
-  before_filter :require_facebook_user, :except => [:feed_action]
+  before_filter :require_facebook_user, :except => [:feed_action, :not_signed_in]
+  
+  def not_signed_in
+    
+  end
   
   def one_line_api
     begin

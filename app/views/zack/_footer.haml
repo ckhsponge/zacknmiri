@@ -9,4 +9,4 @@
       = seperator
       = link_to "Story Publisher", :controller => "story", :action => "index"
       = seperator
-      = link_to "Sign Out", :controller => "zack", :action => "sign_out"
+      = link_to_function "Sign Out from Facebook", "FB.Connect.logoutAndRedirect('/')"
